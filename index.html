@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>오늘의 교육 뉴스 | Rohan Edu</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --paper: #ffffff;
+    --ink: #14213d;
+    --sub: #5f6b7d;
+    --line: #e4e0d6;
+    --navy: #14213d;
+    --hl: #ffd23f;
+    --c-exam: #d64545;
+    --c-eng: #12905f;
+    --c-subj: #e07b00;
+    --c-hist: #0e7490;
+    --c-ai: #2f6fed;
+    --c-new: #7c4dff;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    font-size: 16px; line-height: 1.7;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .k { display: inline; }
+
+  .masthead { background: var(--navy); color: #fff; padding: 26px 0 34px; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 18px; }
+  .brand { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; }
+  .logo {
+    font-size: 17px; font-weight: 800; letter-spacing: .3px;
+    background: var(--hl); color: var(--navy);
+    padding: 2px 10px; border-radius: 6px;
+  }
+  .slogan { font-size: 12.5px; color: #b9c2d6; }
+  .dateline { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 22px 0 4px; }
+  .date { margin: 0; font-size: 14px; color: #b9c2d6; }
+  .dday {
+    flex: none; font-size: 13px; font-weight: 800; color: var(--navy);
+    background: var(--hl); padding: 2px 10px; border-radius: 999px;
+  }
+  h1 { margin: 0; font-size: 30px; line-height: 1.3; font-weight: 800; letter-spacing: -0.5px; }
+  h1 em { font-style: normal; }
+
+  .top3 {
+    margin: -18px 0 0; background: var(--paper);
+    border-radius: 16px; padding: 18px 18px 8px;
+    border-top: 5px solid var(--hl);
+    box-shadow: 0 8px 22px rgba(20,33,61,.12);
+  }
+  .top3 h2 { margin: 0 0 6px; font-size: 17px; }
+  .top3 ol { list-style: none; margin: 0; padding: 0; counter-reset: n; }
+  .top3 li {
+    counter-increment: n; display: flex; gap: 12px; align-items: flex-start;
+    padding: 12px 0; border-top: 1px solid var(--line);
+    font-size: 16px; font-weight: 600; line-height: 1.55;
+  }
+  .top3 li:first-child { border-top: 0; }
+  .top3 li::before {
+    content: counter(n); flex: none; width: 26px; height: 26px; margin-top: 1px;
+    border-radius: 50%; background: var(--navy); color: var(--hl);
+    font-size: 14px; font-weight: 800; text-align: center; line-height: 26px;
+  }
+
+  .jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
+  .jump a {
+    display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+    background: var(--paper); border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 12px; font-size: 14px; font-weight: 700; color: var(--ink);
+  }
+  .jump a i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+  .jump a span { color: var(--sub); font-weight: 600; }
+
+  section { margin-top: 34px; --c: var(--navy); scroll-margin-top: 12px; }
+  section.exam { --c: var(--c-exam); }
+  section.eng  { --c: var(--c-eng); }
+  section.subj { --c: var(--c-subj); }
+  section.ai   { --c: var(--c-ai); }
+  section.new  { --c: var(--c-new); }
+  .jump a.exam { --c: var(--c-exam); } .jump a.eng { --c: var(--c-eng); }
+  .jump a.subj { --c: var(--c-subj); }
+  .jump a.ai { --c: var(--c-ai); }     .jump a.new { --c: var(--c-new); }
+  section > h2 {
+    display: flex; align-items: center; gap: 10px;
+    margin: 0 0 14px; font-size: 21px;
+  }
+  section > h2::before {
+    content: ""; width: 6px; height: 24px; border-radius: 3px; background: var(--c);
+  }
+  section > h2 small { font-size: 13px; font-weight: 700; color: var(--sub); margin-left: auto; }
+
+  .card {
+    background: var(--paper); border: 1px solid var(--line);
+    border-left: 5px solid var(--c);
+    border-radius: 12px; padding: 16px 16px 14px; margin-bottom: 14px;
+  }
+  .card h3 { margin: 0 0 6px; font-size: 18px; line-height: 1.45; font-weight: 800; }
+  .meta { font-size: 12.5px; color: var(--sub); margin-bottom: 10px; }
+  .meta b { color: var(--c); }
+  .tag {
+    display: inline-block; margin-left: 2px; padding: 0 8px; border-radius: 999px;
+    background: color-mix(in srgb, var(--c) 12%, white); color: var(--c); font-weight: 700;
+  }
+  .lead {
+    margin: 0 0 10px; padding: 8px 12px; border-radius: 8px;
+    background: color-mix(in srgb, var(--c) 9%, white);
+    font-size: 15px; font-weight: 700; line-height: 1.55;
+  }
+  .facts { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
+  .chip {
+    display: inline-flex; align-items: baseline; gap: 5px;
+    border: 1px solid var(--line); border-radius: 8px; padding: 3px 9px;
+    font-size: 12.5px; color: var(--sub); background: #faf9f6;
+  }
+  .chip b { font-size: 15px; font-weight: 800; color: var(--c); }
+  .sum { margin: 0 0 14px; padding: 0; list-style: none; }
+  .sum li {
+    position: relative; padding-left: 16px; margin: 5px 0;
+    font-size: 15.5px; color: #2a3550;
+  }
+  .sum li::before {
+    content: ""; position: absolute; left: 0; top: .72em;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--c);
+  }
+  .btn {
+    display: block; text-align: center; text-decoration: none;
+    background: var(--navy); color: #fff;
+    font-weight: 700; font-size: 15px; padding: 12px; border-radius: 10px;
+  }
+  .btn::after { content: " →"; color: var(--hl); }
+  .btn:active { background: #0d1830; }
+
+  section.hist { --c: var(--c-hist); }
+  .hcard { display: flex; gap: 14px; align-items: flex-start; background: #f2f8fa; }
+  .hcard .year {
+    flex: none; min-width: 74px; text-align: center; padding-top: 2px;
+    font-size: 30px; font-weight: 800; line-height: 1.1; color: var(--c); letter-spacing: -1px;
+  }
+  .hcard .year span { font-size: 13px; font-weight: 700; margin-left: 1px; }
+  .hcard .hbody { min-width: 0; }
+  .hcard .meta { margin-bottom: 4px; }
+  .hcard h3 { font-size: 17px; margin-bottom: 4px; }
+  .hdesc { margin: 0 0 8px; font-size: 15px; color: #2a3550; }
+  .hlink { font-size: 14px; font-weight: 700; color: var(--c); text-decoration: none; border-bottom: 1px solid var(--c); }
+
+  footer {
+    margin-top: 40px; padding: 22px 0 34px; text-align: center;
+    font-size: 13px; color: var(--sub); border-top: 1px solid var(--line);
+  }
+  footer strong { color: var(--navy); }
+  footer .contact { margin: 0 0 8px; }
+  footer .contact a { color: var(--navy); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--hl); }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wrap">
+    <div class="brand">
+      <span class="logo">Rohan Edu</span>
+      <span class="slogan">Smarter Edu-Tech, Wiser Humans</span>
+    </div>
+    <div class="dateline">
+      <p class="date">2026년 10월 23일 금요일</p>
+      <span class="dday">수능 D-27</span>
+    </div>
+    <h1>오늘의 <em>교육 뉴스</em></h1>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="top3">
+    <h2>오늘의 핵심 3가지</h2>
+    <ol>
+      <li><span><span class="k">국가교육위원회,</span> <span class="k">대입 개편 시안</span> <span class="k">발표 연말로 연기</span></span></li>
+      <li><span><span class="k">연세대 논술고사서</span> <span class="k">'AI 안경' 쓴</span> <span class="k">수험생 형사고발 검토</span></span></li>
+      <li><span><span class="k">앤트로픽,</span> <span class="k">메타·오픈AI 이어</span> <span class="k">AI 에이전트 '클로드 듀엣' 공개</span></span></li>
+    </ol>
+  </div>
+
+  <ul class="jump">
+    <li><a class="exam" href="#exam"><i></i>입시·수능 <span>5</span></a></li>
+    <li><a class="eng" href="#eng"><i></i>영어교육 <span>3</span></a></li>
+    <li><a class="subj" href="#subj"><i></i>교과 소식 <span>3</span></a></li>
+    <li><a class="ai" href="#ai"><i></i>AI 교육 <span>3</span></a></li>
+    <li><a class="new" href="#new"><i></i>최신 AI 소식 <span>3</span></a></li>
+  </ul>
+
+  <section class="exam" id="exam">
+    <h2>입시·수능 <small>5건</small></h2>
+
+    <div class="card">
+      <h3><span class="k">국교위,</span> <span class="k">대입 개편 시안</span> <span class="k">발표 연말로 연기</span></h3>
+      <div class="meta"><b>국민일보</b> · 2026.10.22</div>
+      <p class="lead"><span class="k">국가교육위원회가</span> <span class="k">서·논술형 수능 도입 등을</span> <span class="k">담은 대입 개편 시안</span> <span class="k">발표를 연말로 미뤘습니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>2028~2037년</b> 중장기 계획</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">국교위는 애초</span> <span class="k">10월 말 '중장기 국가교육발전계획' 시안을</span> <span class="k">발표하고 2027년&nbsp;3월 말</span> <span class="k">확정할 계획이었습니다.</span></li>
+        <li><span class="k">수능 서·논술형 문항 도입,</span> <span class="k">수능·내신 전면 절대평가 전환,</span> <span class="k">수시·정시 통합 등이</span> <span class="k">논의됐지만 발표가</span> <span class="k">연말로 미뤄졌습니다.</span></li>
+        <li><span class="k">교육부와 국교위 사이</span> <span class="k">조율이 매끄럽지 않았다는</span> <span class="k">지적도 나옵니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261022191924657" target="_blank">원문 보기</a>
+    </div>
+
+    <div class="card">
+      <h3><span class="k">정시 '눈치작전' 막는다,</span> <span class="k">경쟁률 익일 공개·접수번호 난수화</span></h3>
+      <div class="meta"><b>뉴스1</b> · 2026.10.22</div>
+      <p class="lead"><span class="k">2027학년도 정시모집부터</span> <span class="k">최종 경쟁률을</span> <span class="k">원서접수 마감 다음 날</span> <span class="k">공개하는 방안이 추진됩니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>1월&nbsp;4일</b> 2027학년도 정시 시작</span>
+        <span class="chip"><b>두 달</b> 남은 준비 기간</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">교육부·대교협·접수 대행사가</span> <span class="k">합동 태스크포스에서</span> <span class="k">경쟁률 공개 시점 변경과</span> <span class="k">접수번호 난수화를 논의했습니다.</span></li>
+        <li><span class="k">마감 직전 몰리는</span> <span class="k">'눈치작전'과 서버 과부하를</span> <span class="k">줄이려는 조치로,</span> <span class="k">10월&nbsp;21일 수시모집</span> <span class="k">시스템 장애의 후속 대책입니다.</span></li>
+        <li><span class="k">대학들은 시스템 개편에</span> <span class="k">준비 기간이 부족하다며</span> <span class="k">부담을 나타내고 있습니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261022130728569" target="_blank">원문 보기</a>
+    </div>
+
+    <div class="card">
+      <h3><span class="k">연세대,</span> <span class="k">논술시험서 'AI 안경' 쓴</span> <span class="k">수험생 형사고발 검토</span></h3>
+      <div class="meta"><b>서울경제</b> · 2026.10.23</div>
+      <p class="lead"><span class="k">연세대가 논술고사에서</span> <span class="k">AI 기능이 있는</span> <span class="k">스마트 안경을 쓴</span> <span class="k">수험생을 형사고발하는</span> <span class="k">방안을 검토 중입니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>10월&nbsp;10일</b> 적발 당일</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">2027학년도 자연·통합계열</span> <span class="k">수학 논술고사에서</span> <span class="k">스마트 안경을 쓴</span> <span class="k">수험생이 감독관에게</span> <span class="k">적발됐습니다.</span></li>
+        <li><span class="k">연세대는 해당 시험을 무효·불합격 처리하고,</span> <span class="k">2028학년도 수시모집</span> <span class="k">응시 자격도 박탈할 계획입니다.</span></li>
+        <li><span class="k">한국교육과정평가원도</span> <span class="k">2027학년도 수능에서</span> <span class="k">스마트 안경을</span> <span class="k">반입 금지 물품으로 지정했습니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261023060129248" target="_blank">원문 보기</a>
+    </div>
+
+    <div class="card">
+      <h3><span class="k">"수능 일주일 전 육지로"…</span> <span class="k">인천, 섬 수험생 29명 지원</span></h3>
+      <div class="meta"><b>아이뉴스24</b> · 2026.10.23</div>
+      <p class="lead"><span class="k">인천시교육청이 백령·대청·연평·덕적도</span> <span class="k">수험생들이 일주일 먼저</span> <span class="k">육지로 나와</span> <span class="k">시험을 준비하도록 지원합니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>29명</b> 지원 대상 수험생</span>
+        <span class="chip"><b>36명</b> 인솔교사 포함 총원</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">도서지역 4개 학교</span> <span class="k">수험생 29명과</span> <span class="k">인솔교사 7명이</span> <span class="k">지원 대상입니다.</span></li>
+        <li><span class="k">인천시청은 수송 차량,</span> <span class="k">옹진군청은 숙박비,</span> <span class="k">하버파크호텔은 객실과</span> <span class="k">학습공간을 제공합니다.</span></li>
+        <li><span class="k">2020년 업무협약 체결 이후</span> <span class="k">해마다 이어지고 있는</span> <span class="k">사업입니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261023055359036" target="_blank">원문 보기</a>
+    </div>
+
+    <div class="card">
+      <h3><span class="k">N수생 대입문 더 좁아진다,</span> <span class="k">2028학년도 주요 대학</span> <span class="k">학생부교과 '재학생만'</span></h3>
+      <div class="meta"><b>헤럴드경제</b> · 2026.10.22</div>
+      <p class="lead"><span class="k">2028학년도 대입에서</span> <span class="k">주요 대학 학생부교과전형의</span> <span class="k">졸업생 지원 제한이</span> <span class="k">크게 늘어납니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>3→12개</b> 졸업생 제한 대학</span>
+        <span class="chip"><b>5.22대1</b> 경희대 실질 경쟁률</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">주요 14개 대학 분석 결과</span> <span class="k">졸업생 지원을 제한하는</span> <span class="k">학생부교과전형이</span> <span class="k">2027학년도 3개에서</span> <span class="k">12개 대학으로 늘었습니다.</span></li>
+        <li><span class="k">내신 5등급제가</span> <span class="k">처음 적용돼</span> <span class="k">과거 합격선과</span> <span class="k">단순 비교하기 어렵습니다.</span></li>
+        <li><span class="k">수능 최저학력기준을</span> <span class="k">충족하지 못하면</span> <span class="k">내신이 좋아도</span> <span class="k">불합격할 수 있습니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261022184633880" target="_blank">원문 보기</a>
+    </div>
+
+  </section>
+
+  <section class="eng" id="eng">
+    <h2>영어교육 <small>3건</small></h2>
+
+    <div class="card">
+      <h3><span class="k">성남 서현고,</span> <span class="k">영미문학 8권으로</span> <span class="k">영어 수행평가</span></h3>
+      <div class="meta"><b>경기일보</b> · 2026.10.22</div>
+      <p class="lead"><span class="k">서현고 2학년이</span> <span class="k">영미문학 작품 8권을</span> <span class="k">모둠별로 읽고</span> <span class="k">기록하는 독서 중심</span> <span class="k">수행평가를 진행하고 있습니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>8권</b> 선정 영미문학 작품</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">영어 교사가 2학기 수업을</span> <span class="k">시작하며 작품을 선정했고,</span> <span class="k">12월 독서토론으로</span> <span class="k">이어질 예정입니다.</span></li>
+        <li><span class="k">영어 말하기·글쓰기 페스티벌,</span> <span class="k">영자신문 'Seohyun Times'</span> <span class="k">발간도 운영합니다.</span></li>
+        <li><span class="k">자신의 생각을</span> <span class="k">영어로 표현하며</span> <span class="k">소통하는 역량을</span> <span class="k">기르는 데 중점을 둡니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261022180215292" target="_blank">원문 보기</a>
+    </div>
+
+    <div class="card">
+      <h3><span class="k">"AI 써도 영어 소통력 필요",</span> <span class="k">영어평가 기관의 분석</span></h3>
+      <div class="meta"><b>동아일보</b> · 2026.10.22</div>
+      <p class="lead"><span class="k">생성형 AI를 쓰는 업무에서도</span> <span class="k">영어 의사소통 능력은</span> <span class="k">여전히 필요하다는</span> <span class="k">분석이 나왔습니다.</span></p>
+      <ul class="sum">
+        <li><span class="k">영어능력평가 지텔프(G-TELP)</span> <span class="k">출제기관 ITSC가</span> <span class="k">'AI 시대 영어 능력 측정의</span> <span class="k">중요성' 보고서를 냈습니다.</span></li>
+        <li><span class="k">AI에 지시하고,</span> <span class="k">답변을 검토하고,</span> <span class="k">결론을 동료에게 설명하는</span> <span class="k">과정 모두에 의사소통 능력이</span> <span class="k">필요하다고 봤습니다.</span></li>
+        <li><span class="k">기업이 직무별로</span> <span class="k">필요한 영어 능력을 먼저</span> <span class="k">파악해야 한다고</span> <span class="k">조언했습니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261022162229053" target="_blank">원문 보기</a>
+    </div>
+
+    <div class="card">
+      <h3><span class="k">세종 참샘초,</span> <span class="k">대만 학교와</span> <span class="k">영어 협력수업</span></h3>
+      <div class="meta"><b>대전일보</b> · 2026.10.22</div>
+      <p class="lead"><span class="k">참샘초 6학년과</span> <span class="k">대만 자매학교 학생들이</span> <span class="k">일대일 파트너를 맺고</span> <span class="k">영어 협력수업에 참여했습니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>6학년</b> 영어 협력수업 대상</span>
+        <span class="chip"><b>이틀간</b> 국제교류 행사</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">10월&nbsp;21~22일 대만 타이난시</span> <span class="k">대광국민소학 방문단과</span> <span class="k">'참샘어울림한마당'을</span> <span class="k">열었습니다.</span></li>
+        <li><span class="k">양국 학생들은</span> <span class="k">음식과 문화를 주제로</span> <span class="k">영어로 의견을 나누고,</span> <span class="k">AI를 활용한 공동 수업도</span> <span class="k">함께했습니다.</span></li>
+        <li><span class="k">참샘초는 11월&nbsp;17~20일</span> <span class="k">학생들과 대만을 방문해</span> <span class="k">교류를 이어갈 예정입니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261022114422537" target="_blank">원문 보기</a>
+    </div>
+
+  </section>
+
+  <section class="subj" id="subj">
+    <h2>교과 소식 <small>3건</small></h2>
+
+    <div class="card">
+      <h3><span class="k">전면 도입된 고교학점제,</span> <span class="k">소규모 학교는</span> <span class="k">과목 선택권 한계</span></h3>
+      <div class="meta"><b>전북일보</b> · 2026.10.22 · <span class="tag">고교 · 교육과정</span></div>
+      <p class="lead"><span class="k">학교 규모에 따라</span> <span class="k">개설 과목 수 차이가 커</span> <span class="k">학생들의 과목 선택권이</span> <span class="k">제한될 수 있다는</span> <span class="k">우려가 나옵니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>28.6개</b> 전국 일반고 평균 개설 과목</span>
+        <span class="chip"><b>21.8개</b> 전북 소규모고 평균</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">전국 소규모 고교 231곳은</span> <span class="k">평균 25.8개 과목을 개설해</span> <span class="k">나머지 학교보다</span> <span class="k">3.5개 적었습니다.</span></li>
+        <li><span class="k">전북은 소규모 고교와</span> <span class="k">일반고 간 격차가</span> <span class="k">7.1개로 전국에서</span> <span class="k">세 번째로 컸습니다.</span></li>
+        <li><span class="k">전북교육청은 온라인학교와</span> <span class="k">공동교육과정으로</span> <span class="k">과목 선택권을</span> <span class="k">보장하겠다고 밝혔습니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261022173841049" target="_blank">원문 보기</a>
+    </div>
+
+    <div class="card">
+      <h3><span class="k">세종시교육청,</span> <span class="k">초등 국어·수학</span> <span class="k">'성취기준 도달도 평가' 12월 시작</span></h3>
+      <div class="meta"><b>오마이뉴스</b> · 2026.10.22 · <span class="tag">초등 · 국어·수학</span></div>
+      <p class="lead"><span class="k">세종시교육청이 12월</span> <span class="k">초등학교 5·6학년</span> <span class="k">국어·수학 평가를 시작으로</span> <span class="k">학기마다 평가를 넓혀갈 계획입니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>79.9%</b> 세종 초중고 사교육 참여율(2025년)</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">2027년에는 3~6학년까지</span> <span class="k">대상을 넓혀</span> <span class="k">학기마다 실시할</span> <span class="k">계획입니다.</span></li>
+        <li><span class="k">교육청은 기초학력 보장을</span> <span class="k">내세우지만,</span> <span class="k">교원단체는 획일적 시험의</span> <span class="k">부활과 사교육 부담 증가를</span> <span class="k">우려하고 있습니다.</span></li>
+        <li><span class="k">2025년 조사에서</span> <span class="k">세종의 사교육 참여율은</span> <span class="k">서울 다음으로</span> <span class="k">높았습니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261022160228958" target="_blank">원문 보기</a>
+    </div>
+
+    <div class="card">
+      <h3><span class="k">충남도교육청,</span> <span class="k">학교장 88명과</span> <span class="k">고교학점제 성과 공유</span></h3>
+      <div class="meta"><b>더팩트</b> · 2026.10.22 · <span class="tag">고교 · 교육과정</span></div>
+      <p class="lead"><span class="k">충남도교육청이 도내 고교 학교장 88명과</span> <span class="k">고교학점제 운영 성과를 나누고</span> <span class="k">서·논술형 평가</span> <span class="k">안착 방안을 논의했습니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>88명</b> 참여 학교장</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">10월&nbsp;22~23일 이틀간</span> <span class="k">충남 예산에서</span> <span class="k">'2026학년도 고교학점제</span> <span class="k">성과 공유 및 학교장 배움 자리'를</span> <span class="k">운영합니다.</span></li>
+        <li><span class="k">고교학점제 전면 도입</span> <span class="k">2년 차를 맞아</span> <span class="k">'질문이 있는 학교' 문화</span> <span class="k">조성 방안을 찾습니다.</span></li>
+        <li><span class="k">교원 수급과</span> <span class="k">학생 과목 미이수 예방 등</span> <span class="k">현장 현안도</span> <span class="k">함께 논의합니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261022163324683" target="_blank">원문 보기</a>
+    </div>
+
+  </section>
+
+  <section class="ai" id="ai">
+    <h2>AI 교육 <small>3건</small></h2>
+
+    <div class="card">
+      <h3><span class="k">"AI에 묻기 전 내 생각부터",</span> <span class="k">인천교육청 '읽걷쓰AI' 수업 실험</span></h3>
+      <div class="meta"><b>전자신문</b> · 2026.10.22</div>
+      <p class="lead"><span class="k">인천시교육청이 10개 정책학교에서</span> <span class="k">학생의 사고력과 주도성을 기르는</span> <span class="k">AI 수업 모델을</span> <span class="k">검증하고 있습니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>2,410명</b> 참여 학생</span>
+        <span class="chip"><b>94.7%</b> 교사 업무 AI 활용률</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">학생이 먼저 생각하고,</span> <span class="k">AI와 탐색한 뒤,</span> <span class="k">자신의 언어로 완성하는</span> <span class="k">'H-A-H' 수업 모델입니다.</span></li>
+        <li><span class="k">정책학교 학생 2,410명이</span> <span class="k">23개 프로젝트에 참여했고,</span> <span class="k">국어·사회 등</span> <span class="k">단일 교과형이 73.9%였습니다.</span></li>
+        <li><span class="k">2학기에는 중1 약 120명을</span> <span class="k">대상으로</span> <span class="k">문해력 증진 효과를</span> <span class="k">비교 실험할 계획입니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261022130217395" target="_blank">원문 보기</a>
+    </div>
+
+    <div class="card">
+      <h3><span class="k">교사 10명 중 8명,</span> <span class="k">객관식 AI 문항생성에</span> <span class="k">"긍정적"</span></h3>
+      <div class="meta"><b>뉴시스</b> · 2026.10.22</div>
+      <p class="lead"><span class="k">한국교육과정평가원 조사에서</span> <span class="k">교사들은 AI 자동문항생성을</span> <span class="k">객관식 문항에서</span> <span class="k">가장 긍정적으로 평가했습니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>80.9%</b> 객관식 문항 긍정 응답</span>
+        <span class="chip"><b>54.2%</b> 서술형 문항 긍정 응답</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">수학·영어·사회 교사</span> <span class="k">861명을 대상으로</span> <span class="k">조사했습니다.</span></li>
+        <li><span class="k">서술형 문항은</span> <span class="k">영어 교사 64.5%,</span> <span class="k">수학 50.2%,</span> <span class="k">사회 47.8%로</span> <span class="k">교과별 차이가 컸습니다.</span></li>
+        <li><span class="k">생성 문항의 오류·편향을</span> <span class="k">점검하는 절차가</span> <span class="k">필요하다는 응답은</span> <span class="k">95% 이상이었습니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261022104328416" target="_blank">원문 보기</a>
+    </div>
+
+    <div class="card">
+      <h3><span class="k">"AI 교실, 수업 설계가 먼저",</span> <span class="k">KEDI 연구</span></h3>
+      <div class="meta"><b>한국교육신문</b> · 2026.10.22</div>
+      <p class="lead"><span class="k">AI·에듀테크 교실을 만들 때</span> <span class="k">첨단기기보다</span> <span class="k">교사의 수업 설계를</span> <span class="k">우선해야 한다는</span> <span class="k">연구 결과가 나왔습니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>24명</b> 공간 디자인 참여 교사</span>
+        <span class="chip"><b>11개</b> 개발된 교육공간 모형</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">한국교육개발원(KEDI)이</span> <span class="k">'수업 설계 중심의</span> <span class="k">디지털 교육공간' 연구를</span> <span class="k">발표했습니다.</span></li>
+        <li><span class="k">초·중·고 교사 24명이</span> <span class="k">공간 디자인에 참여해</span> <span class="k">11개 모형을</span> <span class="k">개발했습니다.</span></li>
+        <li><span class="k">정부의 일률적 장비 보급 대신</span> <span class="k">학교가 교육과정에 맞춰</span> <span class="k">공간을 제안하는 방식으로</span> <span class="k">전환해야 한다고 제언했습니다.</span></li>
+      </ul>
+      <a class="btn" href="https://www.hangyo.com/news/article.html?no=109768" target="_blank">원문 보기</a>
+    </div>
+
+  </section>
+
+  <section class="new" id="new">
+    <h2>최신 AI 소식 <small>3건</small></h2>
+
+    <div class="card">
+      <h3><span class="k">한국서 뜬 오픈AI '닷츠',</span> <span class="k">주간 이용자 세계 3위</span></h3>
+      <div class="meta"><b>이데일리</b> · 2026.10.22</div>
+      <p class="lead"><span class="k">오픈AI의 상시 작동형</span> <span class="k">AI 에이전트 '닷츠'가</span> <span class="k">한국에서 전 세계 3위</span> <span class="k">주간 이용자 수를 기록했습니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>세계 3위</b> 닷츠 주간 이용자</span>
+        <span class="chip"><b>5위권</b> 챗GPT 프로 이용 규모</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">김경훈 오픈AI코리아 대표가</span> <span class="k">10월&nbsp;22일 서울에서 열린</span> <span class="k">'데브데이 익스체인지'에서</span> <span class="k">밝혔습니다.</span></li>
+        <li><span class="k">한국 개발자 요청을 반영해</span> <span class="k">리눅스용 코덱스,</span> <span class="k">여러 폴더 지원 기능 등을</span> <span class="k">개발했다고 설명했습니다.</span></li>
+        <li><span class="k">닷츠는 자체 클라우드로</span> <span class="k">이메일·일정 등 업무를</span> <span class="k">대신 처리하는</span> <span class="k">AI 에이전트입니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261022183028421" target="_blank">원문 보기</a>
+    </div>
+
+    <div class="card">
+      <h3><span class="k">앤트로픽,</span> <span class="k">메타·오픈AI 이어</span> <span class="k">AI 에이전트 '클로드 듀엣' 공개</span></h3>
+      <div class="meta"><b>헤럴드경제</b> · 2026.10.23</div>
+      <p class="lead"><span class="k">앤트로픽이 이용자가</span> <span class="k">일일이 지시하지 않아도</span> <span class="k">스스로 업무를 찾아 수행하는</span> <span class="k">AI 에이전트를 공개했습니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>20달러 이상</b> 월 구독료(미국)</span>
+        <span class="chip"><b>6,000종 이상</b> 연동 가능 앱</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">차상위 모델</span> <span class="k">'클로드 오퍼스&nbsp;5.5' 기반</span> <span class="k">에이전트 '클로드 듀엣'의</span> <span class="k">연구용 미리보기판입니다.</span></li>
+        <li><span class="k">지메일·슬랙·링크트인 등과</span> <span class="k">연동되며,</span> <span class="k">결제·문서 서명 등</span> <span class="k">민감한 조처 전에는</span> <span class="k">승인을 거치도록 했습니다.</span></li>
+        <li><span class="k">증권 거래나</span> <span class="k">자금 이체 같은</span> <span class="k">고위험 작업은</span> <span class="k">승인이 있어도</span> <span class="k">전면 금지했습니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261023062542707" target="_blank">원문 보기</a>
+    </div>
+
+    <div class="card">
+      <h3><span class="k">신생 AI 에이전트 앱 '피클',</span> <span class="k">국내서 인기</span></h3>
+      <div class="meta"><b>헤럴드경제</b> · 2026.10.22</div>
+      <p class="lead"><span class="k">한국인 창업자들이 만든</span> <span class="k">범용 AI 에이전트 앱 '피클'이</span> <span class="k">국내 이용자 사이에서</span> <span class="k">주목받고 있습니다.</span></p>
+      <div class="facts">
+        <span class="chip"><b>17위</b> 앱스토어 소셜 부문 순위</span>
+        <span class="chip"><b>7계단</b> 이틀 만에 상승</span>
+      </div>
+      <ul class="sum">
+        <li><span class="k">네이버·카카오톡·정부24 등과</span> <span class="k">서비스를 연결해</span> <span class="k">요금제 변경, 예매, 주문 같은</span> <span class="k">업무를 대신 처리합니다.</span></li>
+        <li><span class="k">네이버·카카오가</span> <span class="k">범용 AI 에이전트를</span> <span class="k">내놓지 못한 사이</span> <span class="k">빅테크와 스타트업이</span> <span class="k">시장을 선점한다는 분석입니다.</span></li>
+        <li><span class="k">카카오는 12월</span> <span class="k">'카나나 스페이스'</span> <span class="k">비공개 베타를</span> <span class="k">시작할 예정입니다.</span></li>
+      </ul>
+      <a class="btn" href="http://v.daum.net/v/20261022214144225" target="_blank">원문 보기</a>
+    </div>
+
+  </section>
+
+  <section class="hist" id="hist">
+    <h2>역사 속 오늘 <small>10월 23일</small></h2>
+    <div class="card hcard">
+      <div class="year">1996<span>년</span></div>
+      <div class="hbody">
+        <div class="meta"><span class="tag">한국사</span> · 10월 23일에 있었던 일</div>
+        <h3><span class="k">김구 암살범 안두희,</span> <span class="k">버스기사 박기서에게</span> <span class="k">처단되다</span></h3>
+        <p class="hdesc"><span class="k">1949년 백범 김구 선생을</span> <span class="k">저격해 숨지게 한 안두희가,</span> <span class="k">1996년 10월&nbsp;23일</span> <span class="k">버스 운전기사 박기서에게</span> <span class="k">목숨을 잃었습니다.</span> <span class="k">박기서는 범행 뒤</span> <span class="k">스스로 경찰을 찾아가</span> <span class="k">"김구 선생을 존경해 한 일"이라고</span> <span class="k">말했습니다.</span></p>
+        <a class="hlink" href="https://ko.wikipedia.org/wiki/10%EC%9B%94_23%EC%9D%BC" target="_blank">자세히 보기 →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="contact">Contact · <a href="mailto:junghanro0121@gmail.com">junghanro0121@gmail.com</a></p>
+    © <strong>Rohan Edu</strong>
+  </footer>
+</div>
+</body>
+</html>
